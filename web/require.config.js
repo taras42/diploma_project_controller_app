@@ -6,6 +6,6 @@ require.config({
         text: 'lib/requirejs-text/text',
         backbone: 'lib/backbone/backbone',
         css: 'lib/require-css/css',
-        epoxy: 'lib/epoxy/dist/epoxy'
+        epoxy: 'lib/backbone.epoxy/backbone.epoxy'
     }
 });

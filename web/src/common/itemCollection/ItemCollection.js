@@ -2,8 +2,8 @@ define(function(require){
 
 	var _ = require("underscore"),
 		$ = require('jquery'),
-		itemCollectionTemplate = require("text!components/common/itemCollection/template/itemCollectionTemplate.htm"),
-		Item = require("components/common/item/Item"),
+		itemCollectionTemplate = require("text!common/itemCollection/template/itemCollectionTemplate.htm"),
+		Item = require("common/item/Item"),
 		Backbone = require('backbone');
 
 	var defaults = {

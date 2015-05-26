@@ -2,7 +2,7 @@ define(function(require){
 
 	var Backbone = require('backbone'),
 		_ = require('underscore'),
-		itemTemplate = require("text!components/common/item/template/itemTemplate.htm"),
+		itemTemplate = require("text!common/item/template/itemTemplate.htm"),
 		$ = require('jquery');
 
 	var Item = Backbone.View.extend({

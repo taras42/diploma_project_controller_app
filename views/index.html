@@ -4,17 +4,12 @@
     <title><%= title %></title>
   </head>
   <body>
-
-  	<script data-main="require.config" src="lib/requirejs/require.js"></script>
-<!--
+  	<script data-main="require.config" src="src/lib/requirejs/require.js"></script>
   	<script type="text/javascript">
-		require(["src/components/board/Board"], function (Board) {
-			var board = new Board();		
-			// board.render();
-			console.log(board.$el);
+		require(["src/settings/login/LoginView"], function (LoginView) {
+			var loginView = new LoginView();		
+			loginView.render();
 		});
 	</script>
--->
-	
   </body>
 </html>

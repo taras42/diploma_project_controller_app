@@ -3,8 +3,8 @@ define(function(require) {
 	var Backbone = require("backbone"),
 		_ = require("underscore"),
 		ItemCollection = require("common/itemCollection/ItemCollection"),
-		panelTemplate = require("text!./template/panelTemplate"),
-		panelButtonTemplate = require("text!./template/panelButtonTemplate"),
+		panelTemplate = require("text!./template/panelTemplate.htm"),
+		panelButtonTemplate = require("text!./template/panelButtonTemplate.htm"),
 		epoxyViewMixin = require("common/mixin/epoxyViewMixin");
 
 	var Panel = Backbone.View.extend({
@@ -22,6 +22,7 @@ define(function(require) {
 			this.contentTemplate = options.contentTemplate;
 			this.model = options.model;
 			this.title = options.title || "";
+			this.aditionalCssClass = options.aditionalCssClass || "";
 			this.buttons = options.buttons && (new ItemCollection({
 				eventPrefix: "button",
 				items: options.buttons,
@@ -38,7 +39,7 @@ define(function(require) {
 		},
 
 		_onButtonSelected: function(buttonView, buttonModel) {
-			// TODO
+			this.trigger("button:" + buttonModel.get("action"), this, buttonView, buttonModel);
 		},
 
 		_renderButtons: function() {

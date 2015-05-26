@@ -5,6 +5,7 @@ require.config({
         underscore: 'lib/underscore/underscore',
         text: 'lib/requirejs-text/text',
         backbone: 'lib/backbone/backbone',
-        css: 'lib/require-css/css'
+        css: 'lib/require-css/css',
+        epoxy: 'lib/epoxy/dist/epoxy'
     }
 });

@@ -7,6 +7,9 @@ define(function(require) {
 		loginViewTemplate = require("text!settings/login/template/loginViewTemplate.htm"),
 		loginPanelTemplate = require("text!settings/login/template/loginPanelTemplate.htm");
 
+
+	require("css!settings/login/css/loginView.css");
+
 	var LoginView = Backbone.View.extend({
 
 		el: loginViewTemplate,
@@ -17,6 +20,7 @@ define(function(require) {
 			this.parentElement = options.parentElement ? $(options.parentElement) : $("body");
 
 			this.loginPanel = new Panel({
+				title: "Settings",
 				contentTemplate: loginPanelTemplate,
 				aditionalCssClass: "loginForm",
 				buttons: [{

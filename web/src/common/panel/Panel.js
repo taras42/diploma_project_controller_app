@@ -16,13 +16,19 @@ define(function(require) {
 			});
 		},
 
+		constructor: function(options) {
+
+			this.title = options.title || "";
+			this.aditionalCssClass = options.aditionalCssClass || "";
+			
+			Backbone.View.apply(this, arguments);
+		},
+
 		initialize: function(options) {
 			options = options || {};
 
 			this.contentTemplate = options.contentTemplate;
 			this.model = options.model;
-			this.title = options.title || "";
-			this.aditionalCssClass = options.aditionalCssClass || "";
 			this.buttons = options.buttons && (new ItemCollection({
 				eventPrefix: "button",
 				items: options.buttons,

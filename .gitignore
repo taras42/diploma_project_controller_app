@@ -1,0 +1,7 @@
+node_modules/
+BlinkME.xdk
+BlinkME.xdke
+icon.png
+config/*
+db/*
+web/lib/*

@@ -1,0 +1,24 @@
+{
+  "name": "diploma_project",
+  "version": "1.0.0",
+  "authors": [
+    "me"
+  ],
+  "description": "Sensor activity tracker",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "requirejs": "~2.1.15",
+    "requirejs-text": "~2.0.13",
+    "jquery": "~2.1.3",
+    "underscore": "~1.7.0",
+    "backbone": "~1.1.2",
+    "require-css": "~0.1.8"
+  }
+}

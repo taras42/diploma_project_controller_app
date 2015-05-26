@@ -7,6 +7,8 @@ define(function(require) {
 		panelButtonTemplate = require("text!./template/panelButtonTemplate.htm"),
 		epoxyViewMixin = require("common/mixin/epoxyViewMixin");
 
+	require("css!common/panel/css/panel.css");
+
 	var Panel = Backbone.View.extend({
 
 		el: function() {
@@ -20,7 +22,7 @@ define(function(require) {
 
 			this.title = options.title || "";
 			this.aditionalCssClass = options.aditionalCssClass || "";
-			
+
 			Backbone.View.apply(this, arguments);
 		},
 

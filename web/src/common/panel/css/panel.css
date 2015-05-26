@@ -1,0 +1,22 @@
+.panel .header .title {
+	margin-left: 10px;
+  	margin-bottom: 10px;
+  	font-weight: bold;
+  	font-family: monospace;
+}
+
+.panel .footer .button {
+	float: right;
+}
+
+.panel .footer {
+	min-height: 50px;
+	padding: 5px;
+}
+
+.panel {
+	width: 240px;
+	padding: 10px;
+	background-color: #F2F0F0;
+	box-sizing: border-box;
+}

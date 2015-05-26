@@ -1,0 +1,15 @@
+.inputText {
+	padding: 10px;
+	margin: 10px;
+	width: 200px;
+}
+
+.button {
+	padding: 10px;
+	display: inline;
+	box-sizing: border-box;
+	font-family: monospace;
+	font-size: 23px;
+	cursor: pointer;
+	background-color: #CFCFCF;
+}

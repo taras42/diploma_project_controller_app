@@ -24,7 +24,7 @@ define(function(require) {
 				contentTemplate: loginPanelTemplate,
 				aditionalCssClass: "loginForm",
 				buttons: [{
-					title: "Login",
+					title: "->",
 					action: "login"
 				}],
 				model: new Backbone.Model({login: "", password: ""})

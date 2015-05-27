@@ -1,15 +1,14 @@
 define(function(require) {
 
-	var Backbone = require("backbone"),
-		_ = require("underscore"),
+	var _ = require("underscore"),
 		$ = require("jquery"),
+		Backbone = require("backbone"),
 		Panel = require("common/panel/Panel"),
 		SessionModel = require("settings/login/model/SessionModel"),
 		loginViewTemplate = require("text!settings/login/template/loginViewTemplate.htm"),
 		loginPanelTemplate = require("text!settings/login/template/loginPanelTemplate.htm");
 
-
-	require("css!settings/login/css/loginView.css");
+	require("css!settings/css/settings.css");
 
 	var LoginView = Backbone.View.extend({
 
@@ -23,7 +22,7 @@ define(function(require) {
 			this.loginPanel = new Panel({
 				title: "Settings",
 				contentTemplate: loginPanelTemplate,
-				aditionalCssClass: "loginForm",
+				aditionalCssClass: "form",
 				buttons: [{
 					title: "->",
 					action: "login"

@@ -5,18 +5,12 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/general.css">
   </head>
   <body>
-
-  	<script data-main="require.config" src="lib/requirejs/require.js"></script>
-	<!--
-	  	<script type="text/javascript">
-			require(["src/components/board/Board"], function (Board) {
-				var board = new Board();		
-				// board.render();
-				console.log(board.$el);
-			});
-		</script>
-	-->
-
-	Hello	
+  	<script data-main="require.config" src="src/lib/requirejs/require.js"></script>
+  	<script type="text/javascript">
+		require(["src/settings/edit/EditView"], function (EditView) {
+			var editView = new EditView();		
+			editView.render();
+		});
+	</script>
   </body>
 </html>

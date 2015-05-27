@@ -4,7 +4,7 @@ define(function(require) {
 		$ = require("jquery"),
 		Backbone = require("backbone"),
 		Panel = require("common/panel/Panel"),
-		SessionModel = require("settings/login/model/SessionModel"),
+		SessionModel = require("settings/model/SessionModel"),
 		loginViewTemplate = require("text!settings/login/template/loginViewTemplate.htm"),
 		loginPanelTemplate = require("text!settings/login/template/loginPanelTemplate.htm");
 

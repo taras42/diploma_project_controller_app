@@ -4,6 +4,7 @@ define(function(require) {
 		Backbone = require("backbone"),
 		Panel = require("common/panel/Panel"),
 		SettingModel = require("settings/edit/model/SettingModel"),
+		SessionModel = require("settings/model/SessionModel"),
 		editPanelTemplate = require("text!settings/edit/template/editPanelTemplate.htm"),
 		editViewTemplate = require("text!settings/edit/template/editViewTemplate.htm");
 
@@ -18,15 +19,22 @@ define(function(require) {
 			this.parentElement = options.parentElement ? $(options.parentElement) : $("body");
 
 			this.model = new SettingModel();
+			this.sessionModel = new SessionModel();
 
 			this.editPanel = new Panel({
 				title: "Edit settings",
 				contentTemplate: editPanelTemplate,
 				aditionalCssClass: "form",
-				buttons: [{
-					title: "->",
-					action: "edit"
-				}],
+				buttons: [
+					{
+						title: "&#8615;",
+						action: "logout"
+					},
+					{
+						title: "->",
+						action: "edit"
+					}
+				],
 				model: this.model
 			});
 
@@ -35,6 +43,7 @@ define(function(require) {
 
 		initEvents: function() {
 			this.listenTo(this.editPanel, "button:edit", _.bind(this._onEditButton, this));
+			this.listenTo(this.editPanel, "button:logout", _.bind(this._onLogoutButton, this));
 		},
 
 		fetchModel: function() {
@@ -49,14 +58,24 @@ define(function(require) {
 			var self = this;
 
 			this.model.save().done(function(res) {
+				
 				self.model.set({
 					password: "",
 					newPassword: "",
 					confirmPassword: ""
 				});
+
+				self.sessionModel.set(res);
+
 			}).fail(function(res) {
 				var resJSON = res.responseJSON;
 				console.log(resJSON.error);
+			});
+		},
+
+		_onLogoutButton: function() {
+			this.sessionModel.destroy().done(function(res) {
+				res.location && (document.location.href = res.location);
 			});
 		},
 
@@ -64,6 +83,7 @@ define(function(require) {
 			var self = this;
 			
 			this.fetchModel().done(function() {
+				self.sessionModel.set(self.model.toJSON());
 				self.$el.append(self.editPanel.render().$el);
 				self.parentElement.append(self.$el);
 			});

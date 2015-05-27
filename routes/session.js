@@ -15,4 +15,9 @@ router.post('/', function(req, res) {
 	});
 });
 
+router.delete('/', function(req, res) {
+	req.session.setting = undefined;
+	res.send({location: "/"});
+});
+
 module.exports = router;

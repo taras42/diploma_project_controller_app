@@ -10,6 +10,10 @@ define(function(require) {
 
 	require("css!settings/css/settings.css");
 
+	var defaults = {
+		fadeOutTime: 2000
+	}
+
 	var EditView = Backbone.View.extend({
 		el: function() {
 			return _.template(settingsContainerTemplate)({
@@ -71,10 +75,12 @@ define(function(require) {
 
 				self.sessionModel.set(res);
 				self.$el.find(".validationMessage").text("");
+				self.$el.find(".successMessage").show().text("Saved").fadeOut(defaults.fadeOutTime);
 
 			}).fail(function(res) {
 				var resJSON = res.responseJSON;
-				self.$el.find(".validationMessage").text((resJSON && resJSON.error) || "Server error");
+				self.$el.find(".validationMessage").show().text((resJSON && resJSON.error) 
+					|| "Server error").fadeOut(defaults.fadeOutTime);
 			});
 		},
 

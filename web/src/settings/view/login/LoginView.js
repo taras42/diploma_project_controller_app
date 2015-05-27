@@ -10,6 +10,10 @@ define(function(require) {
 
 	require("css!settings/css/settings.css");
 
+	var defaults = {
+		fadeOutTime: 2000
+	}
+
 	var LoginView = Backbone.View.extend({
 
 		el: function() {
@@ -48,7 +52,8 @@ define(function(require) {
 				res.location && (document.location.href = res.location);
 			}).fail(function(res) {
 				var resJSON = res.responseJSON;
-				self.$el.find(".validationMessage").text((resJSON && resJSON.error) || "Server error");
+				self.$el.find(".validationMessage").show().text((resJSON && resJSON.error) 
+					|| "Server error").fadeOut(defaults.fadeOutTime);
 			});
 		},
 

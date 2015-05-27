@@ -36,10 +36,18 @@
 	text-align: center;
 }
 
+.successMessage,
 .validationMessage {
 	font-family: monospace;
 	font-size: 20px;
+}
+
+.validationMessage {
 	color: #C00000;
+}
+
+.successMessage {
+	color: #28A01E;
 }
 
 .form {

@@ -16,13 +16,25 @@ router.get('/', function(req, res) {
 });
 
 router.put('/', function(req, res) {
-	var setting = req.body || {},
-		sessionSetting = req.session.setting; 
+	var body = req.body || {},
+		sessionSetting = req.session.setting,
+		fieldsToOmit = ["newPassword", "confirmPassword", "id"];
 	
 	if (!sessionSetting) {
 		res.status(401).send({error: "Authentication error"});
 	} else {
-		res.send("Saved");
+		if ((body.password !== sessionSetting.password) || (body.newPassword !== body.confirmPassword)) {
+			res.status(401).send({error: "Wrong password or new password doesn't match to confirm password field"});	
+		} else {
+			var password = body.newPassword || sessionSetting.password;
+
+			Settings.findById(sessionSetting.id).then(function(setting) {
+				setting.updateAttributes(_.extend({}, _.omit(body, fieldsToOmit), {password: password})).then(function() {
+					req.session.setting = setting.toJSON();
+					res.send(setting.toJSON());
+				});
+			});
+		}
 	}
 });
 

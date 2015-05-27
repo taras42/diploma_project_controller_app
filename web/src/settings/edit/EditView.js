@@ -46,7 +46,18 @@ define(function(require) {
 		},
 
 		_onEditButton: function() {
-			this.model.save();
+			var self = this;
+
+			this.model.save().done(function(res) {
+				self.model.set({
+					password: "",
+					newPassword: "",
+					confirmPassword: ""
+				});
+			}).fail(function(res) {
+				var resJSON = res.responseJSON;
+				console.log(resJSON.error);
+			});
 		},
 
 		render: function() {

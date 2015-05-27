@@ -17,9 +17,9 @@ router.get('/', function(req, res) {
 
 router.put('/', function(req, res) {
 	var setting = req.body || {},
-		sessionSeting = req.session.setting; 
+		sessionSetting = req.session.setting; 
 	
-	if(!sessionSeting) {
+	if (!sessionSetting) {
 		res.status(401).send({error: "Authentication error"});
 	} else {
 		res.send("Saved");

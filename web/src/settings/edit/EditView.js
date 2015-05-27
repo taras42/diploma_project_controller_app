@@ -17,6 +17,8 @@ define(function(require) {
 
 			this.parentElement = options.parentElement ? $(options.parentElement) : $("body");
 
+			this.model = new SettingModel();
+
 			this.editPanel = new Panel({
 				title: "Edit settings",
 				contentTemplate: editPanelTemplate,
@@ -25,7 +27,7 @@ define(function(require) {
 					title: "->",
 					action: "edit"
 				}],
-				model: new SettingModel({login: "", password: ""})
+				model: this.model
 			});
 
 			this.initEvents();
@@ -35,14 +37,25 @@ define(function(require) {
 			this.listenTo(this.editPanel, "button:edit", _.bind(this._onEditButton, this));
 		},
 
-		_onEditButton: function() {
+		fetchModel: function() {
+			return this.model.fetch({
+				headers: {
+					Accept: "application/json"
+				}
+			});
+		},
 
+		_onEditButton: function() {
+			this.model.save();
 		},
 
 		render: function() {
-			this.$el.append(this.editPanel.render().$el);
-			this.parentElement.append(this.$el);
-			return this;
+			var self = this;
+			
+			this.fetchModel().done(function() {
+				self.$el.append(self.editPanel.render().$el);
+				self.parentElement.append(self.$el);
+			});
 		}
 	});
 

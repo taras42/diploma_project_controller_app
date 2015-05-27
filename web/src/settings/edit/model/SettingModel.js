@@ -5,11 +5,14 @@ define(function(require) {
 	var SettingModel = Backbone.Model.extend({
 		defaults: {
 			login: "",
-			password: "",
+			newPassword: "",
 			confirmPassword: "",
+			password: "",
 			host: "",
 			port: ""
-		}
+		},
+
+		url: "/settings"
 	});
 
 	return SettingModel;

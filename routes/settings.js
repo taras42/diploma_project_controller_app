@@ -1,16 +1,29 @@
 var Settings  = require('../models').Settings;
 var express = require('express');
 var router  = express.Router();
+var _ = require("underscore");
 
 router.get('/', function(req, res) {
-	req.session.uid ? res.render('settings', {title: 'Settings'}) : res.redirect('/');
+	if (req.session.setting) {
+		if (req.accepts("html")) {
+			res.render('settings', {title: 'Edit settings'});
+		} else if (req.accepts("json")) {
+			res.send(_.omit(req.session.setting, "password"));
+		}
+	} else {
+		res.redirect('/');
+	}
 });
 
-router.post('/', function(req, res) {
+router.put('/', function(req, res) {
+	var setting = req.body || {},
+		sessionSeting = req.session.setting; 
 	
+	if(!sessionSeting) {
+		res.status(401).send({error: "Authentication error"});
+	} else {
+		res.send("Saved");
+	}
 });
 
 module.exports = router;
-
-
-

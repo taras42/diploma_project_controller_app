@@ -4,6 +4,7 @@ define(function(require) {
 		_ = require("underscore"),
 		$ = require("jquery"),
 		Panel = require("common/panel/Panel"),
+		UserModel = require("settings/login/model/UserModel"),
 		loginViewTemplate = require("text!settings/login/template/loginViewTemplate.htm"),
 		loginPanelTemplate = require("text!settings/login/template/loginPanelTemplate.htm");
 
@@ -27,7 +28,7 @@ define(function(require) {
 					title: "->",
 					action: "login"
 				}],
-				model: new Backbone.Model({login: "", password: ""})
+				model: new UserModel({login: "", password: ""})
 			});
 
 			this.initEvents();
@@ -38,7 +39,9 @@ define(function(require) {
 		},
 
 		_onLoginButton: function() {
-			console.log(arguments);
+			this.loginPanel.model.save().done(function(response) {
+				console.log("logged in");
+			});
 		},
 
 		render: function() {

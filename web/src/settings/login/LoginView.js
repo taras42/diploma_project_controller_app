@@ -4,7 +4,7 @@ define(function(require) {
 		_ = require("underscore"),
 		$ = require("jquery"),
 		Panel = require("common/panel/Panel"),
-		UserModel = require("settings/login/model/UserModel"),
+		SessionModel = require("settings/login/model/SessionModel"),
 		loginViewTemplate = require("text!settings/login/template/loginViewTemplate.htm"),
 		loginPanelTemplate = require("text!settings/login/template/loginPanelTemplate.htm");
 
@@ -28,7 +28,7 @@ define(function(require) {
 					title: "->",
 					action: "login"
 				}],
-				model: new UserModel({login: "", password: ""})
+				model: new SessionModel({login: "", password: ""})
 			});
 
 			this.initEvents();

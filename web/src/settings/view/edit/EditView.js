@@ -70,6 +70,7 @@ define(function(require) {
 				});
 
 				self.sessionModel.set(res);
+				self.$el.find(".validationMessage").text("");
 
 			}).fail(function(res) {
 				var resJSON = res.responseJSON;

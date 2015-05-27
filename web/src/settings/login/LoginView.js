@@ -38,16 +38,18 @@ define(function(require) {
 		},
 
 		_onLoginButton: function() {
+			var self = this;
+
 			this.loginPanel.model.save().done(function(res) {
 				res.location && (document.location.href = res.location);
 			}).fail(function(res) {
 				var resJSON = res.responseJSON;
-				console.log(resJSON.error);
+				self.$el.find(".validationMessage").text(resJSON.error);
 			});
 		},
 
 		render: function() {
-			this.$el.append(this.loginPanel.render().$el);
+			this.$el.find(".body").append(this.loginPanel.render().$el);
 			this.parentElement.append(this.$el);
 			return this;
 		}

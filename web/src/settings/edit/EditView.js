@@ -69,7 +69,7 @@ define(function(require) {
 
 			}).fail(function(res) {
 				var resJSON = res.responseJSON;
-				console.log(resJSON.error);
+				self.$el.find(".validationMessage").text(resJSON.error);
 			});
 		},
 
@@ -84,7 +84,7 @@ define(function(require) {
 			
 			this.fetchModel().done(function() {
 				self.sessionModel.set(self.model.toJSON());
-				self.$el.append(self.editPanel.render().$el);
+				self.$el.find(".body").append(self.editPanel.render().$el);
 				self.parentElement.append(self.$el);
 			});
 		}

@@ -30,6 +30,18 @@
   	margin-right: auto;
 }
 
+.container .footer {
+	height: 50px;
+	margin-top: 10px;
+	text-align: center;
+}
+
+.validationMessage {
+	font-family: monospace;
+	font-size: 20px;
+	color: #C00000;
+}
+
 .form {
 	width: 440px !important;
 	margin-right: auto;

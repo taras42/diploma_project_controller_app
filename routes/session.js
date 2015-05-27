@@ -7,7 +7,7 @@ router.post('/', function(req, res) {
 
 	Settings.findOne({ where: {login: body.login} }).then(function(setting) {
   		if (setting && (setting.password === body.password)) {
-  			req.session.uid = setting.id;
+  			req.session.setting = setting;
   			res.send({location: '/settings'});
   		} else {
   			res.status(401).send({error: "Wrong login or password"});

@@ -48,7 +48,7 @@ define(function(require) {
 				res.location && (document.location.href = res.location);
 			}).fail(function(res) {
 				var resJSON = res.responseJSON;
-				self.$el.find(".validationMessage").text(resJSON.error);
+				self.$el.find(".validationMessage").text((resJSON && resJSON.error) || "Server error");
 			});
 		},
 

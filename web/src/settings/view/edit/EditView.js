@@ -74,7 +74,7 @@ define(function(require) {
 
 			}).fail(function(res) {
 				var resJSON = res.responseJSON;
-				self.$el.find(".validationMessage").text(resJSON.error);
+				self.$el.find(".validationMessage").text((resJSON && resJSON.error) || "Server error");
 			});
 		},
 

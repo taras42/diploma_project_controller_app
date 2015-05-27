@@ -5,14 +5,18 @@ define(function(require) {
 		Backbone = require("backbone"),
 		Panel = require("common/panel/Panel"),
 		SessionModel = require("settings/model/SessionModel"),
-		loginViewTemplate = require("text!settings/login/template/loginViewTemplate.htm"),
-		loginPanelTemplate = require("text!settings/login/template/loginPanelTemplate.htm");
+		loginPanelTemplate = require("text!settings/view/login/template/loginPanelTemplate.htm"),
+		settingsContainerTemplate = require("text!settings/template/settingsContainerTemplate.htm");
 
 	require("css!settings/css/settings.css");
 
 	var LoginView = Backbone.View.extend({
 
-		el: loginViewTemplate,
+		el: function() {
+			return _.template(settingsContainerTemplate)({
+				additionalCssClass: "loginView"
+			});
+		},
 
 		initialize: function(options) {
 			options = options || {};
@@ -22,7 +26,7 @@ define(function(require) {
 			this.loginPanel = new Panel({
 				title: "Settings",
 				contentTemplate: loginPanelTemplate,
-				aditionalCssClass: "form",
+				additionalCssClass: "form",
 				buttons: [{
 					title: "->",
 					action: "login"

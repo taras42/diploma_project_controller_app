@@ -13,7 +13,7 @@ define(function(require) {
 
 		el: function() {
 			return _.template(panelTemplate)({
-				aditionalCssClass: this.aditionalCssClass,
+				additionalCssClass: this.additionalCssClass,
 				title: this.title
 			});
 		},
@@ -21,7 +21,7 @@ define(function(require) {
 		constructor: function(options) {
 
 			this.title = options.title || "";
-			this.aditionalCssClass = options.aditionalCssClass || "";
+			this.additionalCssClass = options.additionalCssClass || "";
 
 			Backbone.View.apply(this, arguments);
 		},

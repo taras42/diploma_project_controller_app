@@ -3,15 +3,19 @@ define(function(require) {
 	var _ = require("underscore"),
 		Backbone = require("backbone"),
 		Panel = require("common/panel/Panel"),
-		SettingModel = require("settings/edit/model/SettingModel"),
+		SettingModel = require("settings/view/edit/model/SettingModel"),
 		SessionModel = require("settings/model/SessionModel"),
-		editPanelTemplate = require("text!settings/edit/template/editPanelTemplate.htm"),
-		editViewTemplate = require("text!settings/edit/template/editViewTemplate.htm");
+		editPanelTemplate = require("text!settings/view/edit/template/editPanelTemplate.htm"),
+		settingsContainerTemplate = require("text!settings/template/settingsContainerTemplate.htm");
 
 	require("css!settings/css/settings.css");
 
 	var EditView = Backbone.View.extend({
-		el: editViewTemplate,
+		el: function() {
+			return _.template(settingsContainerTemplate)({
+				additionalCssClass: "editView"
+			});
+		},
 
 		initialize: function(options) {
 			options = options || {};
@@ -24,7 +28,7 @@ define(function(require) {
 			this.editPanel = new Panel({
 				title: "Edit settings",
 				contentTemplate: editPanelTemplate,
-				aditionalCssClass: "form",
+				additionalCssClass: "form",
 				buttons: [
 					{
 						title: "&#8615;",

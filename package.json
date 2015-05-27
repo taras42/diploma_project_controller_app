@@ -1,6 +1,7 @@
 {
-  "name": "Sensor activity web interface settings",
+  "name": "ControllerWebAppSettingsInterface",
   "description": "",
+  "repository": "https://github.com/taras42/diploma_project_controller_app",
   "version": "0.0.0",
   "main": "main.js",
   "engines": {

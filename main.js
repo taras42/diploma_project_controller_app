@@ -12,6 +12,9 @@ var express = require('express');
 var session = require('express-session');
 
 var index = require("./routes/index");
+var sessionRouter = require("./routes/session");
+var settingsRouter = require("./routes/settings");
+
 var models = require("./models");
 
 var http = require('http');
@@ -34,6 +37,8 @@ app.use(session({
 
 // routes setup
 app.use('/', index);
+app.use('/session', sessionRouter);
+app.use('/settings', settingsRouter);
 
 // view engine setup
 app.engine('html', cons.underscore);

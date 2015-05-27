@@ -39,8 +39,11 @@ define(function(require) {
 		},
 
 		_onLoginButton: function() {
-			this.loginPanel.model.save().done(function(response) {
-				console.log("logged in");
+			this.loginPanel.model.save().done(function(res) {
+				res.location && (document.location.href = res.location);
+			}).fail(function(res) {
+				var resJSON = res.responseJSON;
+				console.log(resJSON.error);
 			});
 		},
 

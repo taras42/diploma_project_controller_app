@@ -3,11 +3,7 @@ var express = require('express');
 var router  = express.Router();
 
 router.get('/', function(req, res) {
-	if(req.session.uid){
-		res.redirect('/');
-	}else{
-		res.render('settings', {title: 'Settings'});
-	}
+	req.session.uid ? res.render('settings', {title: 'Settings'}) : res.redirect('/');
 });
 
 router.post('/', function(req, res) {

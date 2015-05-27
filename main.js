@@ -35,11 +35,6 @@ app.use(session({
   saveUninitialized: true
 }));
 
-// routes setup
-app.use('/', index);
-app.use('/session', sessionRouter);
-app.use('/settings', settingsRouter);
-
 // view engine setup
 app.engine('html', cons.underscore);
 app.set('views', path.join(__dirname, 'views'));
@@ -52,6 +47,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'web')));
+
+// routes setup
+app.use('/', index);
+app.use('/session', sessionRouter);
+app.use('/settings', settingsRouter);
 
 // server setup
 var server = http.createServer(app);

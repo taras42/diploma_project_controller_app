@@ -6,7 +6,7 @@ var settings = require('./config/settings');
 var seed = require('./seed/seed');
 
 var xbeeAPI = require('xbee-api');
-var request = require('request');
+var xbeeCallbackHelper = require('./helpers/xbeeCallbackHelper');
 
 var express = require('express');
 var session = require('express-session');
@@ -59,32 +59,17 @@ var server = http.createServer(app);
 models.sequelize.sync({force: true}).then(function () {
 	
 	seed.run().done(function(setting) {
-		var port = setting.port,
-			host = setting.host;
+		var port = setting.port || settings.defaultPort;
 		
-		server.listen(settings.defaultPort, function () {
+		server.listen(port, function () {
 
 			console.log('Server started');
-			
-			if(host) {
-				var xbee_api = new xbeeAPI.XBeeAPI({
-					api_mode: 2
-				});
-			
-				xbee_api.on("frame_object", function(frame) {
-					request({
-						url: host + '/io/trigger',
-						method: 'POST',
-						json: {data: frame}
-					}, function(error, response, body){
-						if(error) {
-							console.log(error);
-						} else {
-							console.log(response.statusCode, body);
-						}
-					});
-				});
-			}
+		
+			var xbee_api = new xbeeAPI.XBeeAPI({
+				api_mode: 2
+			});
+		
+			xbee_api.on("frame_object", xbeeCallbackHelper);		
 		});
 	});
 	

@@ -7,6 +7,12 @@ var seed = require('./seed/seed');
 
 var xbeeAPI = require('xbee-api');
 var xbeeCallbackHelper = require('./helpers/xbeeCallbackHelper');
+var SerialPort = require('serialport').SerialPort;
+
+var mraa = new require("mraa"); //require mraa
+console.log('MRAA Version: ' + mraa.getVersion());
+
+var xbeeAPIConstants = xbeeAPI.constants;
 
 var express = require('express');
 var session = require('express-session');
@@ -56,6 +62,8 @@ app.use('/settings', settingsRouter);
 // server setup
 var server = http.createServer(app);
 
+var u = new mraa.Uart(0); // init uart
+
 models.sequelize.sync({force: true}).then(function () {
 	
 	seed.run().done(function(setting) {
@@ -67,6 +75,24 @@ models.sequelize.sync({force: true}).then(function () {
 		
 			var xbee_api = new xbeeAPI.XBeeAPI({
 				api_mode: 2
+			});
+
+			// init serial;
+			var serialport = new SerialPort(u.getDevicePath(), {
+               baudrate: 9600,
+               parser: xbee_api.rawParser()
+            });
+			
+			// run serial
+			serialport.on("open", function() {
+			  console.log("port open");
+			  var frame_obj = { // AT Request to be sent to  
+			    type: xbeeAPIConstants.FRAME_TYPE.AT_COMMAND,
+			    command: "NI",
+			    commandParameter: [],
+			  };
+			 
+			  serialport.write(xbee_api.buildFrame(frame_obj));
 			});
 		
 			xbee_api.on("frame_object", xbeeCallbackHelper);		
